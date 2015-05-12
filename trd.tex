@@ -1,0 +1,78 @@
+\documentclass[letterpaper]{amsart}
+\usepackage[pdftex]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{courier}
+\usepackage{fancyhdr}
+
+\lstset{language=C++}
+\lstset{columns=fullflexible}
+\lstset{basicstyle=\scriptsize\ttfamily}
+\lstset{showspaces=false}
+\lstset{showstringspaces=false}
+
+\geometry{landscape}
+\setlength{\topmargin}{-0.25in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\columnsep}{1in}
+\setlength{\columnseprule}{0.2pt}
+\textwidth 9.5in
+
+\pagestyle{fancy}
+\lhead{Universidad Privada de Santa Cruz de la Sierra - UPSA}
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\newcommand{\includecpp}[2]{
+  \subsection{#1}\
+  \lstinputlisting[language=c++]{#2}
+}
+
+\begin{document}
+  \thispagestyle{fancy}
+  \pagenumbering{Roman}
+  
+  \begin{center}
+    \Huge\textsc{ACM-ICPC Team Reference Document}
+
+    \huge Universidad Privada de Santa Cruz de la Sierra - UPSA
+
+    \vspace{0.50cm}
+  \end{center}
+  
+  \begin{multicols*}{2}
+    \tableofcontents
+  \end{multicols*}
+  
+  \enlargethispage*{\baselineskip}
+  \pagebreak
+  
+  % == CONTENTS == %
+  
+  \pagenumbering{arabic}
+  \setcounter{page}{1}
+  
+  \begin{multicols*}{2}
+    \section{General}
+      \includecpp{Example}{./general/example.cpp}
+    \enlargethispage*{\baselineskip}
+    \pagebreak
+    
+    \section{Graphs}
+      \includecpp{Example}{./graphs/example.cpp}
+    \enlargethispage*{\baselineskip}
+    \pagebreak
+    
+    \section{Strings}
+      \includecpp{Example}{./strings/example.cpp}
+    % == Last section doesn't need a page break == %
+  \end{multicols*}
+\end{document}
