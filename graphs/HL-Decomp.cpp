@@ -1,29 +1,4 @@
-/*
-    Aleksandar "Al3kSaNdaR" Ivanović
-
-    graph
-*/
-#include <cstdio>
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <bitset>
-#include <list>
-#include <map>
-#include <set>
-#include <stack>
-#include <queue>
-#include <vector>
-#include <numeric>
-#include <sstream>
-#include <iomanip>
-#include <cstdlib>
-#include <ctime>
-#include <utility>
-#include <functional>
-
+#include <bits/stdc++.h>
 #define pb push_back
 #define sz size
 #define all(X) (X).begin(), (X).end()

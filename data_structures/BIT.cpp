@@ -1,7 +1,7 @@
 // Most of the implementation comes from e-maxx.ru, although several
 // things can also be found on the TopCoder tutorial about BITs
-// http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=binaryIndexedTrees
-// http://e-maxx.ru/algo/fenwick_tree
+// community.topcoder.com/tc?module=Static&d1=tutorials&d2=binaryIndexedTrees
+// e-maxx.ru/algo/fenwick_tree
 template <typename T>
 class FenwickTree {
  public:

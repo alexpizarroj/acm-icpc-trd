@@ -2,8 +2,8 @@
 ** Given a string S of length n, the Z Algorithm produces
 ** an array Z where Z[i] is the length of the longest substring
 ** starting from S[i] which is also a prefix of S, i.e. the
-** maximum k such that S[j] = S[i + j] for all 0 <= j < k.
-** Note that Z[i] = 0 means that S[0] != S[i].
+** maximum k such that S[j] = S[i + j] for all 0 <= j < k.
+** Note that Z[i] = 0 means that S[0] != S[i].
 */
 void z_func(const string &s) {
   const int length = s.size();
