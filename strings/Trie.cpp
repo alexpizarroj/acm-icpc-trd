@@ -1,41 +1,84 @@
-const int kAlphaSize = 26;
-
+template <size_t alphabet_size>
 struct TrieNode {
-  int cnt, child[kAlphaSize];
+  size_t n_words, n_prefixes;
+  size_t child[alphabet_size];
+
+  TrieNode() : n_words(0), n_prefixes(0) { memset(child, 0, sizeof child); }
 };
 
-class Trie {
- public:
-  vector<TrieNode> T;
+template <size_t alphabet_size>
+struct Trie {
+  static constexpr size_t npos = -1;
+  using TNode = TrieNode<alphabet_size>;
+  vector<TNode> nodes;
 
-  Trie(int nodes_guess = 0) {
-    if (nodes_guess > 0) T.reserve(nodes_guess);
-    T.push_back(TrieNode());
+  Trie() { nodes.emplace_back(); }
+
+  /*
+  ** Maps the given char to an unsigned integer
+  ** inside the range [0..alphabet_size)
+  */
+  size_t char_to_child(char c) {
+    size_t result = c - '0';
+
+    assert(0 <= result && result < alphabet_size);
+    return result;
   }
 
-  void AddWord(const char *s) {
-    int cur = 0;
-    for (int i = -1; i == -1 || s[i]; i++) {
-      T[cur].cnt += 1;
-      if (s[i + 1]) {
-        const int next = int(s[i + 1] - 'a');
-        if (T[cur].child[next] == 0) {
-          T[cur].child[next] = T.size();
-          T.push_back(TrieNode());
-        }
-        cur = T[cur].child[next];
+  /*
+  ** Adds the given word to the trie
+  */
+  void add_word(const char *s) {
+    size_t current = 0;
+
+    for (int i = 0; s[i]; i++) {
+      nodes[current].n_prefixes += 1;
+
+      size_t next_child = char_to_child(s[i]);
+      assert(next_child >= 0);
+
+      size_t next_node = nodes[current].child[next_child];
+      if (next_node == 0) {
+        next_node = nodes.size();
+        nodes[current].child[next_child] = next_node;
+        nodes.emplace_back();
       }
+      current = next_node;
     }
+
+    nodes[current].n_prefixes += 1;
+    nodes[current].n_words += 1;
   }
 
-  int GetTypingLen(const char *s) {
-    int res = 1, cur = T[0].child[int(s[0] - 'a')];
-    for (int i = 0; true; i++) {
-      if (T[cur].cnt == 1 || s[i + 1] == 0) break;
+  /*
+  ** Traverses the trie, following the content of string 's'.
+  ** Returns the node ID where the traversal stopped, or
+  ** Trie::npos if it couldn't follow the whole string.
+  */
+  size_t traverse(const char *s) {
+    size_t current = 0;
 
-      cur = T[cur].child[int(s[i + 1] - 'a')];
-      res += 1;
+    for(int i = 0; s[i]; i++) {
+      size_t next_child = char_to_child(s[i]);
+
+      size_t next_node = nodes[current].child[next_child];
+      if (next_node == 0) { return Trie::npos; }
+
+      current = next_node;
     }
-    return res;
+
+    return current;
+  }
+
+  size_t count_prefixes(const char *s) {
+    size_t node = traverse(s);
+    size_t result = (node == Trie::npos ? 0 : nodes[node].n_prefixes);
+    return result;
+  }
+
+  size_t count_words(const char *s) {
+    size_t node = traverse(s);
+    size_t result = (node == Trie::npos ? 0 : nodes[node].n_words);
+    return result;
   }
 };
