@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 template <size_t alphabet_size>
 struct TrieNode {
   size_t n_words, n_prefixes;
