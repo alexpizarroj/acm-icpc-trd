@@ -58,11 +58,13 @@ struct Trie {
   size_t traverse(const char *s) {
     size_t current = 0;
 
-    for(int i = 0; s[i]; i++) {
+    for (int i = 0; s[i]; i++) {
       size_t next_child = char_to_child(s[i]);
 
       size_t next_node = nodes[current].child[next_child];
-      if (next_node == 0) { return Trie::npos; }
+      if (next_node == 0) {
+        return Trie::npos;
+      }
 
       current = next_node;
     }
