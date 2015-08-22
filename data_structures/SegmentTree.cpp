@@ -52,8 +52,8 @@ struct StNode {
   }
   
   // This function should return a NodeType instance such that calling
-  // Y.merge(X, identity()) for any Node X with no pending updates should
-  // make Y match X exactly.
+  // Y.merge(X, identity()) or Y.merge(identity(), X) for any Node X with no
+  // pending updates should make Y match X exactly.
   static NodeType identity() {
     static auto tmp = (NodeType){0, 0};
     return tmp;
