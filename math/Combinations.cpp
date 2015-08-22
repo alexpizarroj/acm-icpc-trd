@@ -7,12 +7,11 @@ long long comb(int n, int m) {
   return C;
 }
 
-Cuando n y m son grandes y se pide comb(n, m) % MOD,
-    donde MOD es un numero primo, se puede usar el Teorema de Lucas.
+// Cuando n y m son grandes y se pide comb(n, m) % MOD,
+// donde MOD es un numero primo, se puede usar el Teorema de Lucas.
 
 #define MOD 3571
-
-                                  int C[MOD][MOD];
+int C[MOD][MOD];
 
 void FillLucasTable() {
   memset(C, 0, sizeof(C));
