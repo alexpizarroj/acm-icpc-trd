@@ -69,10 +69,3 @@ bool isprime(ll n) {
   if (n % 2 == 0) return false;
   return mrtest(n);
 }
-
-int main() {
-  for (int i = 1; i <= 10; ++i) {
-    cout << isprime(i) << endl;
-  }
-  return 0;
-}
