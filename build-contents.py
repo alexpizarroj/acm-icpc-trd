@@ -5,6 +5,8 @@ def prettify(fn):
   return fn 
 
 if __name__ == '__main__':
+  supported_src = {'.cpp': '\\includecpp', '.java': '\\includejava'};
+ 
   working_dir = os.path.normpath(os.getcwd())
   working_dir = os.path.join(working_dir, "src")
   
@@ -18,10 +20,11 @@ if __name__ == '__main__':
     
     for fn in os.listdir(dirpath):
       filepath = os.path.join(dirpath, fn)
-      if not os.path.isfile(filepath) or not fn.endswith('.cpp'):
+      _, file_ext = os.path.splitext(filepath)
+      if not (os.path.isfile(filepath) and file_ext in supported_src.keys()):
         continue
       
-      subsection = prettify(fn[:-4])
+      subsection = prettify(fn[:-len(file_ext)])
       file_relpath = os.path.join(".", os.path.relpath(filepath))
       file_relpath = file_relpath.replace('\\', '/')
-      print ("\\includecpp{%s}{%s}" % (subsection, file_relpath))
+      print ("%s{%s}{%s}" % (supported_src[file_ext], subsection, file_relpath))

@@ -9,7 +9,6 @@
 \usepackage{courier}
 \usepackage{fancyhdr}
 
-\lstset{language=C++}
 \lstset{columns=fullflexible}
 \lstset{basicstyle=\scriptsize\ttfamily}
 \lstset{showspaces=false}
@@ -34,6 +33,11 @@
 \newcommand{\includecpp}[2]{
   \subsection{#1}\
   \lstinputlisting[language=c++]{#2}
+}
+
+\newcommand{\includejava}[2]{
+  \subsection{#1}\
+  \lstinputlisting[language=java]{#2}
 }
 
 \begin{document}
