@@ -10,40 +10,34 @@ struct MaxFlow {
 
   int find_path() {
     const int inf = int(1e9 + 7);
-    vector<int> visited(n, 0), from(n, -1), used_edge(n, -1);
-    queue<int> q;
-    int u, v, f;
-
-    q.push(s);
-    visited[s] = true;
+    vector<int> from(n, -1), used_edge(n, -1);
+    
+    vector<int> visited(n, -1); queue<int> q;
+    q.push(s); visited[s] = true;
     while (!visited[t] && !q.empty()) {
-      u = q.front();
+      int u = q.front();
       q.pop();
       for (int eid : g[u]) {
         int v = edges[eid].v;
         if (edges[eid].cap > 0 && !visited[v]) {
           from[v] = u, used_edge[v] = eid;
-          q.push(v);
-          visited[v] = true;
-          if (v == t) {
-            break;
-          }
+          q.push(v); visited[v] = true;
+          if (v == t) break;
         }
       }
     }
 
-    f = inf;
-    if (visited[t]) {
-      for (v = t; from[v] > -1; v = from[v]) {
+    int f = inf;
+    if (from[t] != -1) {
+      for (int v = t; from[v] > -1; v = from[v]) {
         f = min(edges[used_edge[v]].cap, f);
       }
-      for (v = t; from[v] > -1; v = from[v]) {
+      for (int v = t; from[v] > -1; v = from[v]) {
         int backid = edges[used_edge[v]].backid;
         edges[used_edge[v]].cap -= f;
         edges[backid].cap += f;
       }
     }
-
     return (f == inf ? 0 : f);
   }
 
